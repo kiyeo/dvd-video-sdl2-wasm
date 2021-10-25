@@ -1,3 +1,5 @@
 # dvd-video-sdl2-wasm
 
+A demo utlizing c++, sdl2, sdl2-image and wasm generated from emscripten using a custom html document
+
 `emcc dvd.cpp -s USE_SDL=2 -s USE_SDL_IMAGE=2 -O3 -o index.js --preload-file ./ --use-preload-plugins`
