@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <time.h>
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -34,18 +36,26 @@ Uint32 frameStart;
 int frameTime;
 int speed = 4;
 
+void change_dvd_color() {
+  SDL_SetTextureColorMod(TEX, rand() % 255, rand() % 255, rand() % 255);
+}
+
 void collision() {
   if (DVDdestR.x + DVDdestR.w >= SCREEN_WIDTH) {
     DVD_xvel = -1;
+    change_dvd_color();
   }
   if (DVDdestR.x <= 0) {
     DVD_xvel = 1;
+    change_dvd_color();
   }
   if (DVDdestR.y <= 0) {
     DVD_yvel = 1;
+    change_dvd_color();
   }
   if (DVDdestR.y + DVDdestR.h >= SCREEN_HEIGHT) {
     DVD_yvel = -1;
+    change_dvd_color();
   }
 }
 
@@ -99,14 +109,16 @@ bool init(void) {
 
 int main() {
   if (init()) {
+    srand(time(NULL));
+
     load_texture();
 
     DVDdestR.w = 340;
     DVDdestR.h = 150;
-    DVDdestR.x = SCREEN_WIDTH / 2;
+    DVDdestR.x = rand() % SCREEN_WIDTH;
     DVDdestR.y = SCREEN_HEIGHT / 2 - DVDdestR.h / 2;
 
-    DVD_xvel = DVD_yvel = 1;
+    DVD_xvel = DVD_yvel = (rand() % 2 + 1 == 1) ? 1 : -1;
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(main_loop, 0, 1);
 #endif

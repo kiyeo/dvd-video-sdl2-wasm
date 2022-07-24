@@ -45,3 +45,8 @@ Instructions:
     ![image](https://user-images.githubusercontent.com/52591219/138643352-632e3c0c-8aa2-4a69-a337-7e9cb930adce.gif)
 
 NOTE: The gh-pages branch contains the compiled code
+
+Compile locally
+```
+g++ dvd.cpp -lSDL2 -lSDL2_image -O3
+```
